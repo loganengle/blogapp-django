@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "blogapp_django"
+version = "2024.8.1"
+description = "Blog website"
+authors = ["Logan Engle <loganengle.se@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1"
+gunicorn = "^22.0.0"
+psycopg2-binary = "^2.9.9"
+pillow = "^10.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,43 @@
+<!-- home.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Main Content Area -->
+            <div class="col-lg-12">
+                <!-- Post preview loop -->
+                {% for post in page_obj %}
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'blogpost' post.slug %}">{{ post.title }}</a>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                Posted by <a href="#">{{ post.author.username }}</a> on {{ post.published_at|date:"F j, Y" }}
+                            </h6>
+                            <p class="card-text">{{ post.body|slice:":200" }}...</p>
+                            <a href="{% url 'blogpost' post.slug %}" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                    <!-- Divider -->
+                    <hr class="my-4" />
+                {% empty %}
+                    <p>No blog posts found.</p>
+                {% endfor %}
+                <!-- Pager -->
+                <div class="d-flex justify-content-end mb-4">
+                    {% if page_obj.has_previous %}
+                        <a class="btn btn-primary text-uppercase" href="?query={{ query }}&page={{ page_obj.previous_page_number }}">← Newer Posts</a>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                        <a class="btn btn-primary text-uppercase ms-2" href="?query={{ query }}&page={{ page_obj.next_page_number }}">Older Posts →</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
